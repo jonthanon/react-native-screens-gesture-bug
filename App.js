@@ -7,8 +7,12 @@
  */
 
 import React, {Component} from 'react';
-import {Button, Platform, StyleSheet, Text, View} from 'react-native';
+import {Button, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
+import { useScreens } from 'react-native-screens';
+import { bold } from 'ansi-colors';
+
+useScreens();
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -23,12 +27,15 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Button"
-          onPress={() => this.props.navigation.navigate('Second')}
-        />
+      <View style={{ flex: 1, flexDirection: 'column' }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text>Hi I'm the FIRST screen</Text>
+        </View>
+        <TouchableOpacity style={{ flex: 1 }} onPress={() => this.props.navigation.push('Second')}>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#3A8EED', borderRadius: 20, margin: 20 }}>
+            <Text style={{ color: 'white', fontWeight: 'bold' }}>Tap me for second screen</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -37,8 +44,11 @@ class HomeScreen extends React.Component {
 class SecondScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Hi I'm the second screen</Text>
+      <View style={{ flex: 1, flexDirection: 'column' }}>
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+          <Text>Hi I'm the SECOND screen</Text>
+        </View>
+        <View style={{flex: 1}}/>
       </View>
     )
   }
